@@ -351,14 +351,7 @@
 <div id="gameContainer">
   <div id="overlay">
     <h1>WORD RUSH</h1>
-    <p>Type fast and defend.<br>⣿⠿⠿⠛⠛⠛⠟⠿⠻⣿⣿⡿⠿⠿⠛⠛⠛⠛⠿⢿
-⣷⣴⣾⠿⠿⠿⣷⢶⢾⣿⣿⡿⢶⡶⠿⠻⠛⣿⣶⣽
-⣿⣿⣏⠶⠀⠀⠭⢺⣺⣿⣿⣧⣺⠧⠄⠀⡰⢛⣽⣿
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⢏⣾⣿
-⣿⣿⣿⣿⣿⠻⠿⠿⠿⠿⠿⠿⢛⣛⣭⣾⣿⣸⣿⣿
-⣿⣿⣿⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣿⣿⣿<br>*Not for slow fingers.*<br></p>
+    <p>Type fast and defend.<br>—<br>Choose Difficulty:<br></p>
 
     <div id="difficultyContainer" aria-label="Difficulty">
       <span style="opacity:0.8;margin-right:6px;"></span>
@@ -442,18 +435,10 @@
 
     <div style="width:100%;height:1px;background:rgba(255,255,255,0.03);margin:8px 0;"></div>
 
-    <!-- Custom theme -->
-    <div class="custom-theme-row">
-      <strong style="color:var(--accent)">Custom Theme</strong>
-      <div class="color-inputs">
-        <label>Accent <input id="colorAccent" type="color" value="#00ffc6"></label>
-        <label>BG Top <input id="colorBg1" type="color" value="#0b0f14"></label>
-        <label>BG Bot <input id="colorBg2" type="color" value="#05070a"></label>
-      </div>
+
 
       <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;">
-        <button id="applyCustomBtn">Apply</button>
-        <button id="saveCustomBtn">Save</button>
+       
         <button class="closeModal" onclick="closeModal('themeModal')">Close</button>
       </div>
     </div>
@@ -501,7 +486,6 @@ const baseSpeeds = {
 
 const 
 WORD_LIST=["apple","river","storm","glass","flame","ocean","stone","dream","light","swift","spark","pulse","grain","sound","cloud","field","plant","peace","trail","fire","wind","leaf","rain","star","wave","moon","sky","rock","sand","path","seed","fog","ice","sun","dust","root","hill","bay","pine","mist","echo","nest","frost","bark","thorn","vine","lake","beach","drift","ember","shore","cave","gale","dew","petal","glow","rift","stream","shade","blaze","dusk","dawn","spire","peak","brook","lumen","sway","ash","coil","maze","veil","hush","glint","flint","crag","grove","lark","brim","tide","realm","swirl","crest","plume","quill","shard","hollow","gleam","bloom","fable","harp","moss","sprig","cinder","tarn","gloom","snare","pike","roar","fang","hoof","scar","veil","spear","torch","fang","drum","glade","rift","pond","whale","cliff","spar","spire","crane","rush","thorny","cove","lagoon","beet","fern","fern","thatch","craggy","briar","sparkle","flake","twig","cobble","bramble","shimmer","sleet","glisten","hum","knoll","burrow","pebble","scout","fangs","fawn","hunt","sable","wolf","fox","cub","owl","hawk","moth","wing","fang","toad","slug","puddle","brooklet","hollow","bough","sap","lichen","fume","ember","smoke","coil","ash","smelt","fume","glint","gleam","spike","thorn","shard","crust","flake","mire","clump","knit","wisp","curl","gleam","flick","tangle","snag","latch","bolt","gear","cog","link","rim","pin","bar","strap","belt","rope","chain","hook","pad","cap","lid","jug","pot","bowl","cup","mug","spoon","fork","knife","plate","pan","tray","rack","beam","plank","block","log","brick","tile","nail","peg","rod","pipe","wire","cord","cords","mesh","net","screen","grid","tile","pane","glassy","slab","slate","chalk","chalky","dusty","muddy","rocky"];
-
 const gameArea=document.getElementById("gameArea"), input=document.getElementById("input"),
       scoreEl=document.getElementById("score"), barEl=document.getElementById("bar"),
       overlay=document.getElementById("overlay"), startBtn=document.getElementById("startBtn"),
@@ -526,7 +510,7 @@ const THEME_STORE_KEY = "wordRushCustomTheme";
 
 // Default presets mapping
 const PRESET_THEMES = {
-  dark: { accent:"#00ffc6", bg1:"#0b0f14", bg2:"#05070a" },
+  dark: { accent:"#ffffff", bg1:"#0b0f14", bg2:"#05070a" },
   neon: { accent:"#ff00ff", bg1:"#0a0014", bg2:"#150022" },
   space: { accent:"#00ccff", bg1:"#000010", bg2:"#020824" },
   fire: { accent:"#ff6600", bg1:"#200000", bg2:"#400000" },
@@ -611,25 +595,6 @@ document.querySelectorAll('.theme-card').forEach(card=>{
     const key = card.dataset.key;
     setTheme(key);
   });
-});
-
-/* Custom theme apply/save buttons */
-document.getElementById('applyCustomBtn').addEventListener('click', ()=>{
-  const theme = {
-    accent: document.getElementById('colorAccent').value,
-    bg1: document.getElementById('colorBg1').value,
-    bg2: document.getElementById('colorBg2').value
-  };
-  applyTheme(theme, false);
-});
-document.getElementById('saveCustomBtn').addEventListener('click', ()=>{
-  const theme = {
-    accent: document.getElementById('colorAccent').value,
-    bg1: document.getElementById('colorBg1').value,
-    bg2: document.getElementById('colorBg2').value
-  };
-  applyTheme(theme, true);
-  alert("Custom theme saved!");
 });
 
 function spawnExplosion(x,y){
