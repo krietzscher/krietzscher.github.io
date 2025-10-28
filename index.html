@@ -2,260 +2,110 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Word Rush v1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Word Rush — Loading</title>
 <style>
   :root {
     --accent: #00ffc6;
-    --bg-1: #000000;
-    --bg-2: #000000;
-    --particle-color: #00ffc6;
+    --bg-1: #0b0f14;
+    --bg-2: #05070a;
+  }
+
+  @keyframes bgMove {
+    from { background-position: 0 0; }
+    to { background-position: 800px 800px; }
   }
   @keyframes glowPulse {
-    0% { text-shadow: 0 0 5px var(--accent), 0 0 20px var(--accent); }
+    0% { text-shadow: 0 0 6px var(--accent), 0 0 20px var(--accent); }
     50% { text-shadow: 0 0 15px var(--accent), 0 0 40px var(--accent); }
-    100% { text-shadow: 0 0 5px var(--accent), 0 0 20px var(--accent); }
+    100% { text-shadow: 0 0 6px var(--accent), 0 0 20px var(--accent); }
   }
-  @keyframes fadeInOut {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
   }
+  @keyframes fadeOut {
+    to { opacity: 0; transform: scale(1.2); }
+  }
+
   html, body {
-    margin:0; padding:0; height:100%; overflow:hidden;
-    font-family:"Courier New", monospace;
-    background: black;
-    color: var(--accent);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-  }
-  #loadingContainer {
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-  }
-  h1 {
-    font-size: 3rem;
-    animation: glowPulse 2s infinite;
-    margin-bottom: 30px;
-  }
-  #loadingBarBg {
-    width: 100%;
-    height: 20px;
-    background: rgba(0,255,198,0.2);
-    border: 2px solid var(--accent);
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 0 auto 20px;
-  }
-  #loadingBarFill {
-    width: 0%;
+    margin: 0;
     height: 100%;
-    background: linear-gradient(90deg, #00ff99, #00ffc6, #0099ff);
-    transition: width 0.3s ease;
+    overflow: hidden;
+    background: radial-gradient(circle at center, var(--bg-1), var(--bg-2));
+    background-size: 800px 800px;
+    animation: bgMove 20s linear infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-family: "Courier New", monospace;
   }
-  #message {
-    font-size: 1.1rem;
-    height: 28px;
-    margin-top: 10px;
-    font-weight: bold;
+
+  #container {
+    text-align: center;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  h1 {
+    font-size: 2.6rem;
+    margin-bottom: 12px;
     animation: glowPulse 2s infinite;
   }
-  #clickToContinue {
-    margin-top: 25px;
-    font-size: 1rem;
-    user-select: none;
-    cursor: pointer;
+
+  p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin-bottom: 28px;
+  }
+
+  button {
+    background: transparent;
+    border: 2px solid var(--accent);
     color: var(--accent);
-    text-decoration: none;
-    opacity: 0;
-    animation: fadeInOut 2s ease-in-out infinite;
-    transition: opacity 1s ease;
-    pointer-events: none;
+    padding: 10px 26px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: glowPulse 3s infinite;
   }
-  #particlesCanvas {
-    position: fixed;
-    top:0; left:0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 0;
+
+  button:hover {
+    background: var(--accent);
+    color: #000;
+    box-shadow: 0 0 20px var(--accent);
   }
-  #fadeOverlay {
-    position: fixed;
-    top:0; left:0;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 1.2s ease;
-    z-index: 5;
+
+  .fade-out {
+    animation: fadeOut 0.8s forwards;
   }
 </style>
 </head>
 <body>
-<canvas id="particlesCanvas"></canvas>
+  <div id="container">
+    <h1>WORD RUSH</h1><br>
+    
+    <p>*Type fast and defend.*<br>⣿⠿⠿⠛⠛⠛⠟⠿⠻⣿⣿⡿⠿⠿⠛⠛⠛⠛⠿⢿
+⣷⣴⣾⠿⠿⠿⣷⢶⢾⣿⣿⡿⢶⡶⠿⠻⠛⣿⣶⣽
+⣿⣿⣏⠶⠀⠀⠭⢺⣺⣿⣿⣧⣺⠧⠄⠀⡰⢛⣽⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⢏⣾⣿
+⣿⣿⣿⣿⣿⠻⠿⠿⠿⠿⠿⠿⢛⣛⣭⣾⣿⣸⣿⣿
+⣿⣿⣿⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣿⣿⣿<br>
+    *Not for slow fingers.*</p>
+    <button id="startGame">OK</button>
+  </div>
 
-<div id="loadingContainer">
-  <h1>WORD RUSH</h1>
-  <div id="loadingBarBg"><div id="loadingBarFill"></div></div>
-  <div id="message"></div>
-  <div id="clickToContinue">Click here to continue once loading is completed.</div>
-</div>
-
-<div id="fadeOverlay"></div>
-
-<script>
-  // Loading messages
-  const messages = [
-  
-    "type fast and defend",
-    "please be patient",
-    "",
-    "please be patient",
-    "",
-    "please be patient",
-    "",
-   "please be patient",
-    "",
-    "please be patient",
-    "",
-    "almost there",
-    "",
-    "almost there",
-    "",
-    "",
-    "here we go",
-    "",
-    "",
-    "loading completed"
-  ];
-  const msgEl = document.getElementById("message");
-  const loadingBarFill = document.getElementById("loadingBarFill");
-  const clickToContinue = document.getElementById("clickToContinue");
-  const fadeOverlay = document.getElementById("fadeOverlay");
-
-  let currentMessageIndex = 0;
-  let loadingPercent = 0;
-  let loadingComplete = false;
-
-  // Target loading duration about 10 seconds
-  const totalDuration = 10000; // 10 seconds in ms
-  const stepInterval = 150; // ms per update
-  const maxSteps = totalDuration / stepInterval;
-
-  function loadStep(step = 0) {
-    if(step < maxSteps) {
-      loadingPercent = (step / maxSteps) * 100;
-      loadingBarFill.style.width = loadingPercent.toFixed(2) + "%";
-      let index = Math.min(messages.length - 1, Math.floor(loadingPercent / (100 / messages.length)));
-      if(index !== currentMessageIndex){
-        currentMessageIndex = index;
-        msgEl.textContent = messages[currentMessageIndex];
-      }
-      setTimeout(() => loadStep(step + 1), stepInterval);
-    } else {
-      loadingPercent = 100;
-      loadingBarFill.style.width = "100%";
-      msgEl.textContent = messages[messages.length - 1];
-      loadingComplete = true;
-      clickToContinue.style.opacity = 1;
-      clickToContinue.style.pointerEvents = "auto";
-    }
-  }
-  loadStep();
-
-  function onClick(){
-    if(loadingComplete){
-      document.body.removeEventListener("click", onClick);
-      fadeOverlay.style.pointerEvents = "auto";
-      fadeOverlay.style.opacity = 1;
+  <script>
+    const btn = document.getElementById("startGame");
+    btn.addEventListener("click", () => {
+      document.body.classList.add("fade-out");
       setTimeout(() => {
         window.location.href = "mainGame.html";
-      }, 1200);
-    }
-  }
-  document.body.addEventListener("click", onClick);
-
-  // Particle system for neon style background
-  const canvas = document.getElementById("particlesCanvas");
-  const ctx = canvas.getContext("2d");
-
-  let width, height;
-  function resize(){
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-  }
-  resize();
-  window.addEventListener("resize", resize);
-
-  class Particle {
-    constructor(){
-      this.x = Math.random()*width;
-      this.y = Math.random()*height;
-      this.radius = Math.random()*1.5 + 0.5;
-      this.speedX = (Math.random() - 0.5) * 0.3;
-      this.speedY = (Math.random() - 0.5) * 0.3;
-      this.alpha = Math.random()*0.5 + 0.3;
-    }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      if(this.x < 0) this.x = width;
-      if(this.x > width) this.x = 0;
-      if(this.y < 0) this.y = height;
-      if(this.y > height) this.y = 0;
-    }
-    draw() {
-      ctx.beginPath();
-      const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius*6);
-      gradient.addColorStop(0, `rgba(0,255,198,${this.alpha})`);
-      gradient.addColorStop(1, 'rgba(0,255,198,0)');
-      ctx.fillStyle = gradient;
-      ctx.arc(this.x, this.y, this.radius*6, 0, Math.PI*2);
-      ctx.fill();
-    }
-  }
-
-  const particles = [];
-  const PARTICLE_COUNT = 60;
-  for(let i=0; i<PARTICLE_COUNT; i++){
-    particles.push(new Particle());
-  }
-
-  function animate(){
-    ctx.clearRect(0, 0, width, height);
-    for(let i=0; i<particles.length; i++){
-      for(let j=i+1; j<particles.length; j++){
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if(dist < 100){
-          ctx.strokeStyle = `rgba(0,255,198,${(1 - dist/100)*0.3})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-    particles.forEach(p => {
-      p.update();
-      p.draw();
+      }, 700);
     });
-    requestAnimationFrame(animate);
-  }
-  animate();
-</script>
+  </script>
 </body>
 </html>
